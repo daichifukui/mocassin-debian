@@ -2,12 +2,12 @@ Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: mocassin
 Source: http://www.3d-mocassin.net
 
-Files: debian/*
-Copyright: 2016 Roger Wesson
-License: GPL-3+
-
 Files: *
 Copyright: 1999- Barbara Ercolano
+License: GPL-3+
+
+Files: debian/*
+Copyright: 2016 Roger Wesson
 License: GPL-3+
 
 License: GPL-3+
