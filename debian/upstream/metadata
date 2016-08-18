@@ -1,5 +1,6 @@
-Name: mocassin
 ASCL-Id: 1110.010
+Contact: ercolano@usm.uni-muenchen.de
+Name: mocassin
 Reference:
   Author: Ercolano B., Barlow M.J., Storey P.J., Liu X.-W.
   Title: MOCASSIN: a fully three-dimensional Monte Carlo photoionization code
