@@ -1,4 +1,4 @@
-! Copyright (C) 2005 Barbara Ercolano 
+! Copyright (C) 2005 Barbara Ercolano
 ! Department of Physics and Astronomy
 ! University College London
 ! Gower Street
@@ -11,7 +11,7 @@
 ! modify it under the terms of the GNU General Public License
 ! as published by the Free Software Foundation; either version 2
 ! of the License, or (at your option) any later version. This requires
-! that any chnages or improvements made to the program should also be 
+! that any changes or improvements made to the program should also be
 ! made freely available.
 
 ! This program is distributed in the hope that it will be useful,
@@ -23,11 +23,11 @@
 ! along with this program; if not, write to the Free Software
 ! Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-!  
-! MoCaSSiN = MOnte CArlo SImulationS of Nebulae 
+!
+! MoCaSSiN = MOnte CArlo SImulationS of Nebulae
 ! Version 2.02
 ! this is the main driver of the simulation
-!  
+!
 program MoCaSSiN
     use common_mod
     use constants_mod
@@ -37,6 +37,7 @@ program MoCaSSiN
     use output_mod
     use set_input_mod
     use xSec_mod
+    use readdata_mod
 
     implicit none
 
@@ -46,7 +47,7 @@ program MoCaSSiN
 
     real            :: test                   ! test
     integer         :: i, iGrid               ! allocation error status
-    real, dimension(2) :: timing              ! cputimer 
+    real, dimension(2) :: timing              ! cputimer
     integer         :: nhours, nminutes, nseconds
 
     call cpu_time(timing(1))
@@ -57,14 +58,12 @@ program MoCaSSiN
     if (taskid == 0) then
         print*, "MOCASSIN 2005 Version 2.0"
         print*, " "
-    end if
+    endif
 
     ! read the input parameters of the simulation
     call readInput()
 
-    if (taskid == 0) then
-        print*, " "
-    end if
+    print*, " "
 
     ! initialize the 3D cartesian grid
 
@@ -81,17 +80,18 @@ program MoCaSSiN
 
     call setStarPosition(grid3D(1)%xAxis,grid3D(1)%yAxis,grid3D(1)%zAxis, grid3D(1:nGrids))
 
-    if (taskid==0) then
-       do iGrid = 1, nGrids
-          print*, 'Grid : ', iGrid
-          print*, 'active cells: ', grid3D(iGrid)%nCells
-       end do
-    end if
+    do iGrid = 1, nGrids
+        print*, 'Grid : ', iGrid
+        print*, 'active cells: ', grid3D(iGrid)%nCells
+    end do
 
     ! prepare atomica data stuff
-    if (lgGas) call makeElements()
+    if (lgGas) then
+      call makeElements()
+      call readData()
+    endif
 
-    if (taskid==0) print*, 'active elements: ', nElementsUsed
+    print*, 'active elements: ', nElementsUsed
 
     ! if grains are included, calculate the dust opacity
     if (lgDust) then
@@ -99,7 +99,7 @@ program MoCaSSiN
        do iGrid = 1, nGrids
           call dustDriver(grid3D(iGrid))
        end do
-       if (taskid==0) print*, '! mocassin: dustDriver done'
+       print*, '! mocassin: dustDriver done'
     end if
 
     call mpi_barrier(mpi_comm_world, ierr)
