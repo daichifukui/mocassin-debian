@@ -33,6 +33,7 @@ Description: MOnte CArlo SimulationS of Ionised Nebulae
  thermal balance.
 
 Package: mocassin-data
+Architecture: all
 Multi-Arch: foreign
 Depends: ${misc:Depends}
 Suggests: mocassin, mocassin-benchmarks, mocassin-examples
@@ -43,6 +44,7 @@ Description: atomic and optical data for the photoionisation code MOCASSIN
  the atomic and optical data necessary to run simulations.
 
 Package: mocassin-benchmarks
+Architecture: all
 Multi-Arch: foreign
 Depends: ${misc:Depends}
 Suggests: mocassin
@@ -54,6 +56,7 @@ Description: benchmarks for the photoionisation code MOCASSIN
  photoionisation codes.
 
 Package: mocassin-examples
+Architecture: all
 Multi-Arch: foreign
 Depends: ${misc:Depends}
 Suggests: mocassin
