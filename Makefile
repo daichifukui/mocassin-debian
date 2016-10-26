@@ -88,4 +88,4 @@ uninstall:
 	rm -f $(DESTDIR)$(PREFIX)/bin/mocassin*
 	rm -f $(MANDIR)/mocassin*.1.gz
 	rm -rf $(DESTDIR)$(PREFIX)/share/mocassin
-	rm -rf $(DESTDIR)$(PREFIX)/share/doc/mocassin 
+	rm -rf $(DESTDIR)$(PREFIX)/share/doc/mocassin
