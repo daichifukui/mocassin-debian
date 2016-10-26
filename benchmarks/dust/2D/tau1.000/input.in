@@ -1,9 +1,9 @@
-autoPackets 0.20 2. 900000000
+autoPackets 0.20 2. 10000000
 output
 symmetricXYZ
 contShape  blackbody
 nebComposition noGas
-maxIterateMC  30 95.
+maxIterateMC  10 95.
 nPhotons 1000000
 nx 40
 ny 40
