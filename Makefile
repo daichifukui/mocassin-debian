@@ -67,12 +67,13 @@ clean:
 
 install: mocassin mocassinWarm mocassinOutput mocassinPlot
 	test -e $(DESTDIR)$(PREFIX)/share/mocassin || mkdir -p $(DESTDIR)$(PREFIX)/share/mocassin
+	test -e $(DESTDIR)$(PREFIX)/share/doc/mocassin || mkdir -p $(DESTDIR)$(PREFIX)/share/doc/mocassin
 	test -e $(DESTDIR)$(PREFIX)/bin || mkdir -p $(DESTDIR)$(PREFIX)/bin
 	test -e $(MANDIR) || mkdir -p $(MANDIR)
 	cp -r data/ $(DESTDIR)$(PREFIX)/share/mocassin
 	cp -r dustData/ $(DESTDIR)$(PREFIX)/share/mocassin
 	cp -r benchmarks/ $(DESTDIR)$(PREFIX)/share/mocassin
-	cp -r examples/ $(DESTDIR)$(PREFIX)/share/mocassin
+	cp -r examples/ $(DESTDIR)$(PREFIX)/share/doc/mocassin
 	install -m 644 man/mocassin.1 $(MANDIR)
 	gzip -f $(MANDIR)/mocassin.1
 	ln -s -f $(MANDIR)/mocassin.1.gz $(MANDIR)/mocassinWarm.1.gz
@@ -87,3 +88,4 @@ uninstall:
 	rm -f $(DESTDIR)$(PREFIX)/bin/mocassin*
 	rm -f $(MANDIR)/mocassin*.1.gz
 	rm -rf $(DESTDIR)$(PREFIX)/share/mocassin
+	rm -rf $(DESTDIR)$(PREFIX)/share/doc/mocassin
