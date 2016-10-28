@@ -5,9 +5,8 @@ Maintainer: Debian Astronomy Team <debian-astro-maintainers@lists.alioth.debian.
 Uploaders: Roger Wesson <rw@nebulousresearch.org>
 Build-Depends: debhelper (>= 9.0.0),
                gfortran,
-               libc6 (>= 2.14),
-               libgcc1 (>= 1:4.1.1),
-               libmpich-dev (>= 3.0.4)
+               gcc,
+               libmpich-dev
 Standards-Version: 3.9.8
 Homepage: http://www.3d-mocassin.net
 Vcs-Git: https://anonscm.debian.org/git/debian-astro/packages/mocassin.git
