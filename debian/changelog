@@ -1,3 +1,9 @@
+mocassin (2.02.72-2) unstable; urgency=low
+
+  * simplified build dependencies (Closes: #842364)
+
+ -- Roger Wesson <rw@nebulousresearch.org>  Mon, 31 Oct 2016 14:36:59 +0000
+
 mocassin (2.02.72-1) unstable; urgency=low
 
   * new upstream version 2.02.72.  major speedup for gas models from more
