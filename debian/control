@@ -5,7 +5,6 @@ Maintainer: Debian Astronomy Team <debian-astro-maintainers@lists.alioth.debian.
 Uploaders: Roger Wesson <rw@nebulousresearch.org>
 Build-Depends: debhelper (>= 9.0.0),
                gfortran,
-               gcc,
                libmpich-dev
 Standards-Version: 3.9.8
 Homepage: http://www.3d-mocassin.net
