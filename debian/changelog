@@ -1,3 +1,9 @@
+mocassin (2.02.73-1) unstable; urgency=low
+
+  * new upstream release
+
+ -- Roger Wesson <rw@nebulousresearch.org>  Fri, 24 Aug 2018 21:16:59 +0100
+
 mocassin (2.02.72-2) unstable; urgency=low
 
   * simplified build dependencies (Closes: #842364)
