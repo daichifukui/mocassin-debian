@@ -1,5 +1,7 @@
 mocassin (2.02.73-2) unstable; urgency=low
 
+  * updated standards-version
+  * updated Format url in copyright
   * fixed wrong intent on variable (Closes: #952320)
 
  -- Roger Wesson <rw@nebulousresearch.org>  Mon, 24 Feb 2020 14:41:24 +0000
