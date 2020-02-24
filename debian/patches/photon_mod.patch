@@ -1,0 +1,13 @@
+Author: Roger Wesson
+Description: Fixes FTBFS caused by loop variable being passed to another function with intent inout
+--- a/source/photon_mod.f90
++++ b/source/photon_mod.f90
+@@ -29,7 +29,7 @@
+         integer, intent(in)            :: n           ! number of energy packets
+         integer, intent(in)            :: iStar       ! central star index
+ 
+-        integer, intent(inout), optional &
++        integer, intent(in), optional &
+              & :: gpLoc                               ! local grid (only used for extra diffuse sources)
+         integer, intent(inout), optional &
+              & :: cellLoc(3)                          ! local cell (only used for extra diffuse sources)
