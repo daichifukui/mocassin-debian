@@ -1,3 +1,9 @@
+mocassin (2.02.73-2) unstable; urgency=low
+
+  * fixed wrong intent on variable (Closes: #952320)
+
+ -- Roger Wesson <rw@nebulousresearch.org>  Mon, 24 Feb 2020 14:41:24 +0000
+
 mocassin (2.02.73-1) unstable; urgency=low
 
   * new upstream release
