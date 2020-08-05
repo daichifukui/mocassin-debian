@@ -1,3 +1,3 @@
 photon_mod.patch
 man.patch
-install.patch
+Makefile.patch

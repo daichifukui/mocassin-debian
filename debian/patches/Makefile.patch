@@ -2,6 +2,15 @@ Author: Roger Wesson
 Description: install examples to /usr/share/doc/mocassin.
 --- a/Makefile
 +++ b/Makefile
+@@ -5,7 +5,7 @@
+ ifeq ($(FC),ifort)
+   FFLAGS += -cpp -DPREFIX=\"$(PREFIX)\" -module source/
+ else
+-  FFLAGS += -cpp -Jsource/ -ffree-line-length-0 -lm -DPREFIX=\"$(PREFIX)\" -I/usr/include/mpich
++  FFLAGS += -cpp -Jsource/ -ffree-line-length-0 -lm -DPREFIX=\"$(PREFIX)\" -I/usr/include/mpich -std=legacy
+ endif
+
+ #IBM
 @@ -67,12 +67,13 @@
  
  install: mocassin mocassinWarm mocassinOutput mocassinPlot
