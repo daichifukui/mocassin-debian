@@ -1,3 +1,9 @@
+mocassin (2.02.73-3) unstable; urgency=low
+
+  * compile with -std=legacy to word with gcc-10 (Closes: #957555)
+
+ -- Roger Wesson <rw@nebulousresearch.org>  Wed, 05 Aug 2020 14:33:17 +0100
+
 mocassin (2.02.73-2) unstable; urgency=low
 
   * updated standards-version
