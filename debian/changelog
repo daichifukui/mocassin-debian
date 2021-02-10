@@ -1,4 +1,4 @@
-mocassin (2.02.73.1-1) UNRELEASED; urgency=medium
+mocassin (2.02.73.1-1) unstable; urgency=medium
 
   * new upstream release
   * updated Standards-Version and debhelper-compat, added Rules-Requires-Root
