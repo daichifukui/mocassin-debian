@@ -1,0 +1,29 @@
+Description: fix spelling errors in program messages
+ Fix "avalable" and "assignement", reported by lintian as
+ spelling-error-in-binary.
+Author: Claude <noreply@anthropic.com>
+Forwarded: no
+Last-Update: 2026-10-26
+
+--- a/source/photon_mod.f90
++++ b/source/photon_mod.f90
+@@ -1971,7 +1971,7 @@ module photon_mod
+                    else if ( (dS == dSz) .and. (vHat%z < 0.) ) then
+                       zP = zP-1
+                    else
+-                      print*, '! pathSegment: insanity occurred in dS assignement &
++                      print*, '! pathSegment: insanity occurred in dS assignment &
+                            & [dS,dSx,dSy,dSz,vHat]', dS,dSx,dSy,dSz,vHat
+                    end if
+                 else
+--- a/source/set_input_mod.f90
++++ b/source/set_input_mod.f90
+@@ -293,7 +293,7 @@ module set_input_mod
+                 read(unit=10, fmt=*, iostat=ios) keyword
+                 lg1D = .true.
+                 !print*, keyword
+-                print*, 'ERROR: oneD option is not currently avalable!!!!'
++                print*, 'ERROR: oneD option is not currently available!!!!'
+                 stop
+              case ("densityFile")
+                  backspace 10

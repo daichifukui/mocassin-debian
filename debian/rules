@@ -4,6 +4,8 @@
 # Uncomment this to turn on verbose mode.
 #export DH_VERBOSE=1
 
+export DEB_BUILD_MAINT_OPTIONS = hardening=+all
+
 # The sources pass buffers of different types and ranks to the same MPI
 # routines through mpif.h, which gfortran >= 10 rejects by default. Newer
 # mpich wrappers no longer add this flag themselves (Closes: #1149751).

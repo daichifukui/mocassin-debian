@@ -1,3 +1,7 @@
-version=3
-opts=filenamemangle=s/.+\/mocassin.?(\d\S*)\.tar\.gz/mocassin-$1\.tar\.gz/ \
-  https://github.com/rwesson/mocassin/tags .*/mocassin.?(\d\S*)\.tar\.gz
+Version: 5
+
+Source: https://api.github.com/repos/rwesson/mocassin/git/matching-refs/tags/mocassin.
+Matching-Pattern: https://api.github.com/repos/[^/]+/[^/]+/git/refs/tags/mocassin\.@ANY_VERSION@
+Download-Url-Mangle: s%(api.github.com/repos/[^/]+/[^/]+)/git/refs/%$1/tarball/refs/%g
+Filename-Mangle: s%.*/mocassin\.@ANY_VERSION@%@PACKAGE@-$1.tar.gz%
+Search-Mode: plain

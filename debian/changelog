@@ -8,6 +8,16 @@ mocassin (2.02.73.2-2) UNRELEASED; urgency=medium
   * Update Homepage to https://mocassin.nebulousresearch.org/, as
     www.3d-mocassin.net is no longer the project's site (Closes: #1134523)
   * Point Source in debian/copyright at the upstream GitHub repository
+  * Fix lintian issues:
+    - Update debian/watch to version 5, using the GitHub tags API
+      (obsolete-debian-watch-file-standard)
+    - Enable all hardening options, adding bindnow (hardening-no-bindnow)
+    - Bump Standards-Version to 4.7.4, no changes needed
+      (out-of-date-standards-version)
+    - Drop Priority and Rules-Requires-Root fields, which now default to
+      optional and no (redundant-priority-optional-field,
+      redundant-rules-requires-root-no-field)
+    - Add fix-spelling-errors.patch (spelling-error-in-binary)
 
  -- Claude <noreply@anthropic.com>  Mon, 26 Oct 2026 01:46:55 +0000
 
