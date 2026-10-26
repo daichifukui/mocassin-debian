@@ -1,6 +1,6 @@
 Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: mocassin
-Source: http://www.3d-mocassin.net
+Source: https://github.com/rwesson/mocassin
 
 Files: *
 Copyright: 1999- Barbara Ercolano
