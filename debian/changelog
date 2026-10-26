@@ -1,3 +1,10 @@
+mocassin (2.02.73.2-2) UNRELEASED; urgency=medium
+
+  * Build with -fallow-argument-mismatch to fix FTBFS with gfortran and
+    mpich 5, whose mpif90 wrapper no longer adds that flag (Closes: #1149751)
+
+ -- Claude <noreply@anthropic.com>  Mon, 26 Oct 2026 01:46:55 +0000
+
 mocassin (2.02.73.2-1) unstable; urgency=medium
 
   * New upstream version 2.02.73.2. Closes: #982851
