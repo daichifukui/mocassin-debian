@@ -2124,6 +2124,10 @@ endif
         end if
 
         ! data from Benjamin, Skillman and Smits ApJ514(1999)307 [e-25 ergs*cm^3/s]
+
+        if(T4<0.5) T4 =0.5 ! the coefficients are only defined between 5000 and 20000K
+        if(T4>2.) T4 = 2.
+
         if (denint>0.and.denint<3) then
            do i =1, 34
               x1=HeIrecLineCoeff(i,denint,1)*(T4**(HeIrecLineCoeff(i,denint,2)))*exp(HeIrecLineCoeff(i,denint,3)/T4)
@@ -2719,7 +2723,7 @@ endif
     end subroutine writeSED
 
 
-    subroutine writeContCube(grid, freq1,freq2)
+    subroutine writeContCube(grid, wave1,wave2)
       implicit none
 
       type(grid_type), intent(in) :: grid(*)
@@ -2727,7 +2731,8 @@ endif
       integer :: ios,ix,iy,iz, iG        ! I/O error status, counters
       integer ::  freq, imu, ifreq1, ifreq2      ! counters
 
-      real, intent(inout)         :: freq1,freq2 ! wavelengths in um
+      real, intent(in)            :: wave1,wave2 ! wavelengths in um
+      real                        :: freq1,freq2
       real                        :: contI(0:nanglebins) ! continuum int in band
 
       print*, 'in writeContCube'
@@ -2741,14 +2746,16 @@ endif
          stop
       end if
 
-      freq1 = c/(freq1*1.e-4*fr1Ryd)
-      freq2 = c/(freq2*1.e-4*fr1Ryd)
+      freq1 = c/(wave1*1.e-4*fr1Ryd)
+      freq2 = c/(wave2*1.e-4*fr1Ryd)
 
       call locate(nuArray(1:nbins), freq1, ifreq2)
       if (ifreq2 <= 0) ifreq2=1
 
       call locate(nuArray(1:nbins), freq2, ifreq1)
       if (ifreq1 <= 0) ifreq1=1
+
+      print*,'! writeContCube: nuArray indices used - ',ifreq1, ifreq2, freq1,freq2
 
 
       do iG = 1, nGrids
@@ -2762,8 +2769,7 @@ endif
 
                      do imu=0,nanglebins
                         contI(imu)=0.
-!                        do freq = ifreq1, ifreq2
-                        do freq = 1, nbins
+                        do freq = ifreq1, ifreq2
                            contI(imu) = contI(imu)+&
                                 & grid(iG)%escapedPackets(grid(iG)%active(ix,iy,iz),freq,imu)
                         end do
