@@ -1,2 +1,3 @@
 fix-module-dependencies.patch
 fix-spelling-errors.patch
+use-the-mpi-module-instead-of-mpif.h.patch
