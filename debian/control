@@ -5,7 +5,7 @@ Uploaders: Roger Wesson <rw@nebulousresearch.org>
 Build-Depends: debhelper-compat (= 13),
                gfortran,
                libmpich-dev
-Standards-Version: 4.5.1
+Standards-Version: 4.7.4
 Homepage: https://mocassin.nebulousresearch.org/
 Vcs-Git: https://salsa.debian.org/debian-astro-team/mocassin.git
 Vcs-Browser: https://salsa.debian.org/debian-astro-team/mocassin
