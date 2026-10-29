@@ -1,25 +1,21 @@
-mocassin (2.02.73.2-2) UNRELEASED; urgency=medium
+mocassin (2.02.73.4-1) UNRELEASED; urgency=medium
 
-  * Build with -fallow-argument-mismatch to fix FTBFS with gfortran and
-    mpich 5, whose mpif90 wrapper no longer adds that flag (Closes: #1149751)
-  * Add fix-module-dependencies.patch declaring Fortran module dependencies
-    in the Makefile, fixing FTBFS with make --shuffle=reverse
+  * Team upload.
+  * New upstream version 2.02.73.4
+    Upstream now builds with -std=legacy, fixing the FTBFS (Closes: #1149751)
+    Upstream now declares Fortran module dependencies in the Makefile
     (Closes: #1105528)
-  * Update Homepage to https://mocassin.nebulousresearch.org/, as
+  * d/control: Update Homepage to https://mocassin.nebulousresearch.org/, as
     www.3d-mocassin.net is no longer the project's site (Closes: #1134523)
-  * Point Source in debian/copyright at the upstream GitHub repository
-  * Fix lintian issues:
-    - Update debian/watch to version 5, using the GitHub tags API
-      (obsolete-debian-watch-file-standard)
-    - Enable all hardening options, adding bindnow (hardening-no-bindnow)
-    - Bump Standards-Version to 4.7.4, no changes needed
-      (out-of-date-standards-version)
-    - Drop Priority and Rules-Requires-Root fields, which now default to
-      optional and no (redundant-priority-optional-field,
-      redundant-rules-requires-root-no-field)
-    - Add fix-spelling-errors.patch (spelling-error-in-binary)
+  * d/patches: Add fix-spelling-errors.patch
+  * d/copyright: Point Source in debian/copyright at the upstream repository
+  * d/watch: Update debian/watch to version 5
+  * d/rules: Enable all hardening options, adding bindnow
+  * d/control: Bump Standards-Version to 4.7.4
+  * d/control: Drop Priority and Rules-Requires-Root fields, which now default
+    to optional and no
 
- -- Claude <noreply@anthropic.com>  Mon, 26 Oct 2026 01:46:55 +0000
+ -- Fukui Daichi <a.dog.will.talk@akane.waseda.jp>  Thu, 29 Oct 2026 14:50:09 +0900
 
 mocassin (2.02.73.2-1) unstable; urgency=medium
 

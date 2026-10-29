@@ -1,8 +1,8 @@
 Description: fix spelling errors in program messages
  Fix "avalable" and "assignement", reported by lintian as
  spelling-error-in-binary.
-Author: Claude <noreply@anthropic.com>
-Forwarded: no
+Author: Fukui Daichi <a.dog.will.talk@akane.waseda.jp>
+Forwarded: https://github.com/rwesson/mocassin/pull/14
 Last-Update: 2026-10-26
 
 --- a/source/photon_mod.f90

@@ -33,7 +33,7 @@ VERSION := $(shell if [ -e debian/ ]; then dpkg-parsechangelog -S version; elif 
 ifeq ($(FC),ifort)
   FFLAGS += -cpp -DPREFIX=\"$(PREFIX)\" -DVERSION=\"$(VERSION)\" -module source/
 else
-  FFLAGS += -cpp -Jsource/ -ffree-line-length-0 -lm -DPREFIX=\"$(PREFIX)\" -DVERSION=\"$(VERSION)\" -I/usr/local/include
+  FFLAGS += -cpp -Jsource/ -ffree-line-length-0 -lm -DPREFIX=\"$(PREFIX)\" -DVERSION=\"$(VERSION)\" -I/usr/local/include -std=legacy
 endif
 
 MANDIR=$(DESTDIR)$(PREFIX)/share/man/man1
@@ -57,7 +57,9 @@ endif
 
 all: mocassin mocassinWarm mocassinOutput mocassinPlot
 
-new: clean all
+new:
+	$(MAKE) clean
+	$(MAKE) all
 
 %.o: %.f90
 	$(FC) $(FFLAGS) $< -c -o $@
@@ -74,6 +76,33 @@ mocassinOutput: $(SOURCES) source/mocassinOutput.o
 mocassinPlot: $(SOURCES) source/mocassinPlot.o
 	$(LD) $(LDFLAGS) $(FFLAGS) -o $@ $^
 
+source/common_mod.o : source/common_mod.f90 source/vector_mod.o source/constants_mod.o
+source/composition_mod.o : source/composition_mod.f90 source/common_mod.o source/constants_mod.o
+source/constants_mod.o : source/constants_mod.f90
+source/continuum_mod.o : source/continuum_mod.f90 source/interpolation_mod.o source/common_mod.o source/constants_mod.o
+source/dust_mod.o : source/dust_mod.f90 source/ph_mod.o source/interpolation_mod.o source/continuum_mod.o source/common_mod.o
+source/emission_mod.o : source/emission_mod.f90 source/hydro_mod.o source/ph_mod.o source/grid_mod.o source/continuum_mod.o source/common_mod.o source/constants_mod.o
+source/fluorescence_mod.o : source/fluorescence_mod.f90 source/vector_mod.o source/pathIntegration_mod.o source/interpolation_mod.o source/grid_mod.o source/continuum_mod.o source/constants_mod.o source/common_mod.o
+source/gaunt.o : source/gaunt.f90
+source/grid_mod.o : source/grid_mod.f90 source/ph_mod.o source/vector_mod.o source/set_input_mod.o source/pathIntegration_mod.o source/interpolation_mod.o source/hydro_mod.o source/continuum_mod.o source/constants_mod.o source/composition_mod.o source/common_mod.o
+source/hydro_mod.o : source/hydro_mod.f90 source/interpolation_mod.o source/common_mod.o
+source/interpolation_mod.o : source/interpolation_mod.f90
+source/ionization_mod.o : source/ionization_mod.f90 source/ph_mod.o source/constants_mod.o source/common_mod.o
+source/iteration_mod.o : source/iteration_mod.f90 source/update_mod.o source/photon_mod.o source/output_mod.o source/ionization_mod.o source/emission_mod.o source/continuum_mod.o source/common_mod.o
+source/mocassin.o : source/mocassin.f90 source/readdata_mod.o source/ph_mod.o source/set_input_mod.o source/output_mod.o source/iteration_mod.o source/grid_mod.o source/dust_mod.o source/constants_mod.o source/common_mod.o
+source/mocassinFluorescence.o : source/mocassinFluorescence.f90 source/ph_mod.o source/set_input_mod.o source/output_mod.o source/iteration_mod.o source/grid_mod.o source/dust_mod.o source/constants_mod.o source/common_mod.o
+source/mocassinOutput.o : source/mocassinOutput.f90 source/ph_mod.o source/set_input_mod.o source/output_mod.o source/iteration_mod.o source/grid_mod.o source/constants_mod.o source/common_mod.o
+source/mocassinPlot.o : source/mocassinPlot.f90 source/readdata_mod.o source/ph_mod.o source/set_input_mod.o source/output_mod.o source/iteration_mod.o source/grid_mod.o source/emission_mod.o source/constants_mod.o source/common_mod.o
+source/mocassinWarm.o : source/mocassinWarm.f90 source/ph_mod.o source/set_input_mod.o source/output_mod.o source/iteration_mod.o source/grid_mod.o source/dust_mod.o source/constants_mod.o source/common_mod.o
+source/output_mod.o : source/output_mod.f90 source/photon_mod.o source/emission_mod.o source/constants_mod.o source/common_mod.o
+source/pathIntegration_mod.o : source/pathIntegration_mod.f90 source/vector_mod.o source/interpolation_mod.o source/common_mod.o
+source/ph_mod.o : source/ph_mod.f90 source/interpolation_mod.o source/hydro_mod.o source/constants_mod.o source/common_mod.o
+source/photon_mod.o : source/photon_mod.f90 source/vector_mod.o source/pathIntegration_mod.o source/interpolation_mod.o source/grid_mod.o source/continuum_mod.o source/constants_mod.o source/common_mod.o
+source/readdata_mod.o : source/readdata_mod.f90 source/common_mod.o
+source/set_input_mod.o : source/set_input_mod.f90 source/common_mod.o
+source/update_mod.o : source/update_mod.f90 source/ph_mod.o source/interpolation_mod.o source/grid_mod.o source/emission_mod.o source/composition_mod.o source/common_mod.o source/constants_mod.o
+source/vector_mod.o : source/vector_mod.f90 source/constants_mod.o
+
 clean:
 	/bin/rm -f source/*.o *~ source/*.mod mocassin mocassinWarm mocassinOutput mocassinPlot
 
@@ -88,9 +117,9 @@ install: mocassin mocassinWarm mocassinOutput mocassinPlot
 	cp -R examples $(DESTDIR)$(PREFIX)/share/doc/mocassin
 	install -m 644 man/mocassin.1 $(MANDIR)
 	gzip -f $(MANDIR)/mocassin.1
-	ln -s -f mocassin.1.gz $(MANDIR)/mocassinWarm.1.gz
-	ln -s -f mocassin.1.gz $(MANDIR)/mocassinOutput.1.gz
-	ln -s -f mocassin.1.gz $(MANDIR)/mocassinPlot.1.gz
+	ln -s -f $(MANDIR)/mocassin.1.gz $(MANDIR)/mocassinWarm.1.gz
+	ln -s -f $(MANDIR)/mocassin.1.gz $(MANDIR)/mocassinOutput.1.gz
+	ln -s -f $(MANDIR)/mocassin.1.gz $(MANDIR)/mocassinPlot.1.gz
 	install mocassin $(DESTDIR)$(PREFIX)/bin
 	install mocassinWarm $(DESTDIR)$(PREFIX)/bin
 	install mocassinPlot $(DESTDIR)$(PREFIX)/bin
