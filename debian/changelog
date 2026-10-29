@@ -1,3 +1,22 @@
+mocassin (2.02.73.4-1) UNRELEASED; urgency=medium
+
+  * Team upload.
+  * New upstream version 2.02.73.4
+    Upstream now builds with -std=legacy, fixing the FTBFS (Closes: #1149751)
+    Upstream now declares Fortran module dependencies in the Makefile
+    (Closes: #1105528)
+  * d/control: Update Homepage to https://mocassin.nebulousresearch.org/, as
+    www.3d-mocassin.net is no longer the project's site (Closes: #1134523)
+  * d/patches: Add fix-spelling-errors.patch
+  * d/copyright: Point Source in debian/copyright at the upstream repository
+  * d/watch: Update debian/watch to version 5
+  * d/rules: Enable all hardening options, adding bindnow
+  * d/control: Bump Standards-Version to 4.7.4
+  * d/control: Drop Priority and Rules-Requires-Root fields, which now default
+    to optional and no
+
+ -- Fukui Daichi <a.dog.will.talk@akane.waseda.jp>  Thu, 29 Oct 2026 14:50:09 +0900
+
 mocassin (2.02.73.2-1) unstable; urgency=medium
 
   * New upstream version 2.02.73.2. Closes: #982851
