@@ -8,6 +8,9 @@ mocassin (2.02.73.4-1) UNRELEASED; urgency=medium
   * d/control: Update Homepage to https://mocassin.nebulousresearch.org/, as
     www.3d-mocassin.net is no longer the project's site (Closes: #1134523)
   * d/patches: Add fix-spelling-errors.patch
+  * d/patches: Add fix-man-symlinks.patch
+    Cherry-picked from upstream. Fixes a regression of #982851 in 2.02.73.4,
+    which was released from a branch that lacked the upstream fix.
   * d/copyright: Point Source in debian/copyright at the upstream repository
   * d/watch: Update debian/watch to version 5
   * d/rules: Enable all hardening options, adding bindnow
