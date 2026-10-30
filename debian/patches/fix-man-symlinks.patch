@@ -1,0 +1,29 @@
+Description: fix relative target of manpage links
+ The man page links for mocassinWarm, mocassinOutput and mocassinPlot
+ target $(MANDIR)/mocassin.1.gz, which includes $(DESTDIR), so they point
+ into the build tree and dangle once installed. Make them relative.
+ .
+ Upstream fixed this on master in 2021, but the 2.02.73.3 and 2.02.73.4
+ releases were tagged from the rw_changes branch, which never received the
+ fix, so the bug came back.
+Author: Chris Lamb <lamby@debian.org>
+Origin: upstream, https://github.com/rwesson/mocassin/commit/ff2d517138cae4f91d76e6ee11e067866412786c
+Bug-Debian: https://bugs.debian.org/982851
+Forwarded: not-needed
+Last-Update: 2026-10-29
+
+--- a/Makefile
++++ b/Makefile
+@@ -117,9 +117,9 @@
+ 	cp -R examples $(DESTDIR)$(PREFIX)/share/doc/mocassin
+ 	install -m 644 man/mocassin.1 $(MANDIR)
+ 	gzip -f $(MANDIR)/mocassin.1
+-	ln -s -f $(MANDIR)/mocassin.1.gz $(MANDIR)/mocassinWarm.1.gz
+-	ln -s -f $(MANDIR)/mocassin.1.gz $(MANDIR)/mocassinOutput.1.gz
+-	ln -s -f $(MANDIR)/mocassin.1.gz $(MANDIR)/mocassinPlot.1.gz
++	ln -s -f mocassin.1.gz $(MANDIR)/mocassinWarm.1.gz
++	ln -s -f mocassin.1.gz $(MANDIR)/mocassinOutput.1.gz
++	ln -s -f mocassin.1.gz $(MANDIR)/mocassinPlot.1.gz
+ 	install mocassin $(DESTDIR)$(PREFIX)/bin
+ 	install mocassinWarm $(DESTDIR)$(PREFIX)/bin
+ 	install mocassinPlot $(DESTDIR)$(PREFIX)/bin
